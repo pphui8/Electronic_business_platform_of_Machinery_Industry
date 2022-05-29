@@ -1,0 +1,13 @@
+.nav_link {
+  padding: 5px 25px;
+  margin: 5px 0;
+  color: #131313;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: all 0.3s;
+  font-weight: 700;
+  display: block;
+  font-size: 20px;
+  background-color: transparent;
+}

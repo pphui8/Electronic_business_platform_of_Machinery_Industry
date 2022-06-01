@@ -23,7 +23,6 @@ public class UserDaoImp implements UserDao {
 			List<Long> rs=queryRunner.query(sql, new ColumnListHandler<Long>("num"),account);
 			return rs.size()>0?rs.get(0).intValue():0;
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return 0;
 		}
@@ -31,7 +30,6 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public User findUserByAccountAndPassword(String account, String password) {
-		// TODO Auto-generated method stub
 		String sql="select * from users where account=? and password=?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<User>(User.class),account,password);

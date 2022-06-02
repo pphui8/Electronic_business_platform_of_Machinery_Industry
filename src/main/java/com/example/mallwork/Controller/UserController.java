@@ -21,7 +21,6 @@ public class UserController {
 	@Autowired
 	private UserService actionUserService;
 
-
 	@RequestMapping("/do_login.do")
 	@ResponseBody
 	public SverResponse<User> doLogin(HttpSession session, String account, String password) {

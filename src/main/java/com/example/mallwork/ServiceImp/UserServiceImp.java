@@ -11,13 +11,12 @@ import com.example.mallwork.Vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.commons.dbutils.QueryRunner;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImp implements UserService {
 	//创建actionuserdao对象
 	@Autowired//自动装载对象
 	private UserDao actionUserDao;

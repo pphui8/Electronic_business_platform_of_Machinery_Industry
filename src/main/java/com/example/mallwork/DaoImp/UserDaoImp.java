@@ -41,7 +41,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int checkUserByEamil(String email) {
-		String sql="select count(account) as num from action_users where email=?";
+		String sql="select count(account) as num from users where email=?";
 		try {
 			List<Long> rs = queryRunner.query(sql,new ColumnListHandler<Long>("num"), email);
 			return rs.size()>0?rs.get(0).intValue():0;
@@ -53,7 +53,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int checkUserByPhone(String phone) {
-		String sql="select count(account) as num from action_users where phone=?";
+		String sql="select count(account) as num from users where phone=?";
 		try {
 			List<Long> rs = queryRunner.query(sql,new ColumnListHandler<Long>("num"), phone);
 			return rs.size()>0?rs.get(0).intValue():0;
@@ -65,7 +65,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int insertUser(User user) {
-		String sql = "insert into action_users(account,password,email,phone,question,asw,role,create_time,update_time)"
+		String sql = "insert into users(account,password,email,phone,question,asw,role,create_time,update_time)"
 				+ " values(?,?,?,?,?,?,?,?,?)";
 		Object[] params = {user.getAccount(),user.getPassword(),user.getEmail(),user.getPhone(),user.getQuestion(),
 							user.getAsw(),user.getRole(),user.getCreate_time(),user.getUpData_time()};
@@ -79,7 +79,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public User findUserByAccount(String account) {
-		String sql = "select * from action_users where account=?";
+		String sql = "select * from users where account=?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<User>(User.class), account);
 		} catch (SQLException e) {
@@ -91,7 +91,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int checkUserAnswer(String account,String question, String asw) {
-		String sql = "select count(account) as num from action_users"
+		String sql = "select count(account) as num from users"
 				+ " where account=? and question = ? and asw = ?";
 		try {
 			List<Long> rs = queryRunner.query(sql, new ColumnListHandler<Long>("num"),account,question, asw);
@@ -104,7 +104,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public User findUserById(Integer userId) {
-		String sql = "select * from action_users where id=?";
+		String sql = "select * from users where id=?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<User>(User.class), userId);
 		} catch (SQLException e) {
@@ -115,7 +115,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int updateUserInfo(User user) {
-		String sql = "update action_users set update_time = ?,password = ?,email = ?,"
+		String sql = "update users set update_time = ?,password = ?,email = ?,"
 				+ "phone = ?,question = ?,asw = ?,name = ?, age = ?,sex = ?,create_time = ?,"
 				+ "account = ?,role = ?,del = ? where id=?";
 		List<Object> params = new ArrayList<>();
@@ -144,7 +144,7 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public int checkPassword(String account, String oldPassword) {
-		String sql ="select count(account) as num from action_users where account=? and password=?";
+		String sql ="select count(account) as num from users where account=? and password=?";
 		try {
 			List<Long> rs = queryRunner.query(sql, new ColumnListHandler<Long>("num"),account,oldPassword);
 			return rs.size()>0?rs.get(0).intValue():0;

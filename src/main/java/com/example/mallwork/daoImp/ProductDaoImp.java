@@ -1,6 +1,6 @@
-package com.example.mallwork.DaoImp;
+package com.example.mallwork.daoImp;
 
-import com.example.mallwork.Dao.ProductDao;
+import com.example.mallwork.dao.ProductDao;
 import com.example.mallwork.Entity.Product;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -14,12 +14,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository//Êý¾Ý·ÃÎÊ²ã
+@Repository//ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Ê²ï¿½
 public class ProductDaoImp implements ProductDao {
 	/**
-	 * ²éÑ¯×ÜÊýÁ¿
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
-	@Autowired //×Ô¶¯´´½¨
+	@Autowired //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	private QueryRunner queryRunner;
 	private String alias = "id,name,product_id as productId,"
 			+ "parts_id as partsId,icon_url as iconUrl,sub_images as"
@@ -30,7 +30,7 @@ public class ProductDaoImp implements ProductDao {
 		// TODO Auto-generated method stub
 		
 		String sql = "select count(*) as num from action_products where 1=1";
-		//²ÎÊý¼¯ºÏ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<Object> params=new ArrayList<>();
 		
 		if (productId!=null) {
@@ -43,7 +43,7 @@ public class ProductDaoImp implements ProductDao {
 			}
 		try {
 			
-			return queryRunner.query(sql, new ColumnListHandler<Long>("num"),params.toArray()).get(0).intValue();//»ñÈ¡·µ»ØlistµÄµÚ0¸öÔªËØ²¢×ª»¯ÎªintÐÍ
+			return queryRunner.query(sql, new ColumnListHandler<Long>("num"),params.toArray()).get(0).intValue();//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½listï¿½Äµï¿½0ï¿½ï¿½Ôªï¿½Ø²ï¿½×ªï¿½ï¿½Îªintï¿½ï¿½
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -53,7 +53,7 @@ public class ProductDaoImp implements ProductDao {
 	}
 	
 	/**
-	 * ²éÑ¯¾ßÌåÐÅÏ¢
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public List<Product> findProductsByInfo(Integer productId, Integer partsId, Integer startIndex,
@@ -63,7 +63,7 @@ public class ProductDaoImp implements ProductDao {
 				+"icon_url as iconUrl,sub_images as subImages,detail,spec_param as specParam,"
 				+"price,stock,status,is_hot as hot,"
 				+"created,updated from action_products where 1=1";
-		//²ÎÊý¼¯ºÏ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<Object> params=new ArrayList<>();
 		
 		if (productId!=null) {
@@ -88,7 +88,7 @@ public class ProductDaoImp implements ProductDao {
 		return null;
 	}
 	/**
-	 * ¸ù¾Ýid²éÑ¯ÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public Product findProductById(Integer id) {
@@ -101,7 +101,7 @@ public class ProductDaoImp implements ProductDao {
 		}
 	}
 	/**
-	 * ¸üÐÂÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public int updateProduct(Product product) {
@@ -163,7 +163,7 @@ public class ProductDaoImp implements ProductDao {
 		}
 	}
 	/**
-	 * Çé¿ö¹ºÎï³µ¼ÇÂ¼
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½Â¼
 	 */
 	@Override
 	public int deleteCartProduct(Integer userid) {
@@ -176,7 +176,7 @@ public class ProductDaoImp implements ProductDao {
 		}
 	}
 	/**
-	 * ²éÕÒÈÈÃÅÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	 */
 	@Override
 	public List<Product> findHotProducts(Integer num) {
@@ -197,7 +197,7 @@ public class ProductDaoImp implements ProductDao {
 		}
 	}
 	/**
-	 * ¸ù¾ÝÉÌÆ·ÀàÐÍ²éÑ¯ÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Í²ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public List<Product> findProductsByProductCategory(int categoryId) {
@@ -210,7 +210,7 @@ public class ProductDaoImp implements ProductDao {
 		}
 	}
 	/**
-	 * ²éÑ¯×Ü¼ÇÂ¼Êý
+	 * ï¿½ï¿½Ñ¯ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 	 */
 	@Override
 	public Integer getTotalCount(Product product) {
@@ -245,7 +245,7 @@ public class ProductDaoImp implements ProductDao {
 	}
 
 	/**
-	 * ¸ù¾ÝÌõ¼þ·ÖÒ³²éÑ¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯
 	 */
 	@Override
 	public List<Product> findProducts(Product product, int startIndex, int pageSize) {

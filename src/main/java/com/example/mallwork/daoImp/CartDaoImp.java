@@ -1,6 +1,6 @@
-package com.example.mallwork.DaoImp;
+package com.example.mallwork.daoImp;
 
-import com.example.mallwork.Dao.CartDao;
+import com.example.mallwork.dao.CartDao;
 import com.example.mallwork.Entity.Cart;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -20,7 +20,7 @@ public class CartDaoImp implements CartDao {
 	
 	private String alais="id,user_id as userId,product_id as productId,quantity,created,updated,checked";
 	/**
-	 * ²éÕÒÓÃ»§¹ºÎï³µÖÐÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public List<Cart> findCartByUser(Integer userid) {
@@ -33,7 +33,7 @@ public class CartDaoImp implements CartDao {
 		}
 	}
 	/**
-	 * ¸ù¾ÝÓÃ»§idºÍÉÌÆ·id²éÑ¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½ï¿½ï¿½Æ·idï¿½ï¿½Ñ¯
 	 */
 	@Override
 	public Cart findCartByUserAndProductId(Integer userid, Integer productId) {
@@ -46,7 +46,7 @@ public class CartDaoImp implements CartDao {
 		}
 	}
 	/**
-	 * ÐÂÔö¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï³µ
 	 */
 	@Override
 	public int insertCart(Cart cart) {
@@ -61,7 +61,7 @@ public class CartDaoImp implements CartDao {
 		}	
 	}
 	/**
-	 * ¸üÐÂÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public int updateCartById(Cart Cart) {
@@ -77,7 +77,7 @@ public class CartDaoImp implements CartDao {
 		}
 	}
 	/**
-	 * Çå¿Õ¹ºÎï³µ
+	 * ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 	 */
 
 	@Override
@@ -91,7 +91,7 @@ public class CartDaoImp implements CartDao {
 		}
 	}
 	/**
-	 * ¸üÐÂ¹ºÎï³µÄÚÈÝ
+	 * ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public int updateCartByUserIdAndProductId(Cart Cart) {
@@ -115,7 +115,7 @@ public class CartDaoImp implements CartDao {
 		
 	}
 	/**
-	 * É¾³ý¹ºÎï³µÖÐÉÌÆ·
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·
 	 */
 	@Override
 	public int deleteCarts(Integer userId, Integer productId) {
@@ -128,7 +128,7 @@ public class CartDaoImp implements CartDao {
 		}
 	}
 	/**
-	 * ²éÑ¯¹ºÎï³µÖÐÉÌÆ·ÊýÁ¿
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public int getCartCountByUserId(Integer userid) {

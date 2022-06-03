@@ -1,4 +1,4 @@
-package com.example.mallwork.Controller;
+package com.example.mallwork.controller;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.Entity.User;
@@ -18,7 +18,7 @@ public class CartController {
 	@Autowired
 	private CartService CartService;
 	/**
-	 * Ìí¼Ó¹ºÎï³µ
+	 * ï¿½ï¿½Ó¹ï¿½ï¿½ï³µ
 	 * @param session
 	 * @param productId
 	 * @param count
@@ -27,32 +27,32 @@ public class CartController {
 	@RequestMapping("/savecart.do")
 	@ResponseBody
 	public SverResponse<String> addProductCart(HttpSession session, Integer productId, Integer count) {
-		//1.ÅÐ¶ÏUserÊÇ·ñµÇÂ¼
+		//1.ï¿½Ð¶ï¿½Userï¿½Ç·ï¿½ï¿½Â¼
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if (user==null) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºóÔÙ½øÐÐ²Ù×÷£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ù½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		return CartService.saveOrUpdate(user.getId(),productId,count);
 		
 	}
 	/**
-	 * ²é¿´¹ºÎï³µ
+	 * ï¿½é¿´ï¿½ï¿½ï¿½ï³µ
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/findallcarts.do")
 	@ResponseBody
 	public SverResponse<CartVo> findAllCarts(HttpSession session) {
-		//1.ÅÐ¶ÏUserÊÇ·ñµÇÂ¼
+		//1.ï¿½Ð¶ï¿½Userï¿½Ç·ï¿½ï¿½Â¼
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if (user==null) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºóÔÙ½øÐÐ²Ù×÷£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ù½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		return CartService.findAllCarts(user.getId());
 		
 	}
 	/**
-	 * Çå¿Õ¹ºÎï³µ
+	 * ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 	 * @param session
 	 * @return
 	 */
@@ -61,14 +61,14 @@ public class CartController {
 	public SverResponse<String> clearCarts(HttpSession session){
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if(user == null ) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºó£¬ÔÚ²é¿´¹ºÎï³µ£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú²é¿´ï¿½ï¿½ï¿½ï³µï¿½ï¿½");
 		}
-		//Çå¿Õ¹ºÎï³µ
+		//ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 		return CartService.clearCart(user.getId());
 	}
 	
 	/**
-	 * ¸üÐÂ¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µ
 	 * @param session
 	 * @param productId
 	 * @param productId
@@ -80,13 +80,13 @@ public class CartController {
 	public SverResponse<CartVo> updateCarts(HttpSession session,Integer productId,Integer count,Integer checked){
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if(user == null ) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºó£¬ÔÚ²é¿´¹ºÎï³µ£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú²é¿´ï¿½ï¿½ï¿½ï³µï¿½ï¿½");
 		}
 		return CartService.updateCart(user.getId(),productId,count,checked);
 	}
 	
 	/**
-	 * É¾³ýÉÌÆ·
+	 * É¾ï¿½ï¿½ï¿½ï¿½Æ·
 	 * @param session
 	 * @param productId
 	 * @return
@@ -96,12 +96,12 @@ public class CartController {
 	public SverResponse<CartVo> deleteCart(HttpSession session,Integer productId){
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if(user == null ) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºó£¬ÔÚ²é¿´¹ºÎï³µ£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú²é¿´ï¿½ï¿½ï¿½ï³µï¿½ï¿½");
 		}
 		return CartService.deleteCart(user.getId(),productId);
 	}
 	/**
-	 * ¹ºÎï³µÊýÁ¿
+	 * ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½
 	 * @param session
 	 * @return
 	 */
@@ -110,7 +110,7 @@ public class CartController {
 	public SverResponse<Integer> getCartsCount(HttpSession session){
 		User user = (User) session.getAttribute(ConstUtil.CUR_USER);
 		if(user == null ) {
-			return SverResponse.createByErrorMessage("ÇëµÇÂ¼ºó£¬ÔÚ²é¿´¹ºÎï³µ£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ú²é¿´ï¿½ï¿½ï¿½ï³µï¿½ï¿½");
 		}
 		return CartService.getCartCount(user.getId());
 	}

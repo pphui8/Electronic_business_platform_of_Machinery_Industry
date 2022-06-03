@@ -1,7 +1,7 @@
 package com.example.mallwork.ServiceImp;
 
 import com.example.mallwork.Common.SverResponse;
-import com.example.mallwork.Dao.ParamDao;
+import com.example.mallwork.dao.ParamDao;
 import com.example.mallwork.Entity.Param;
 import com.example.mallwork.Service.ParamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ public class ParamServiceImp implements ParamService {
 	@Autowired
 	public ParamDao ParamDao;
 	/**
-	 * ²éÕÒÉÌÆ·£¬·ÖÀàÕ¹Ê¾
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹Ê¾
 	 */
 	@Override
 	public SverResponse<List<Param>> findAllParams() {
-		//²éÕÒÒ»¼¶×Ó½Úµã
+		//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó½Úµï¿½
 		List<Param> paramList = ParamDao.findParamsByParentId(0);
-		//µÝ¹é²éÑ¯ËùÓÐ×Ó½Úµã
+		//ï¿½Ý¹ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 		for(Param param : paramList) {
 			findDirectChildren(param);
 		}
 		return SverResponse.createRespBySuccess(paramList);
 	}
-	//µÝ¹é²éÕÒ
+	//ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½
 	private void findDirectChildren(Param parentParam) {
-		//²éÕÒ×Ó½Úµã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½
 		List<Param> paramList = ParamDao.findParamsByParentId(parentParam.getId());
 		parentParam.setChildren(paramList);
 		for(Param p:paramList) {

@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.Product;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProductDao {
 	/**
-	 * ¸ù¾ÝÌõ¼þ²éÑ¯ÉÌÆ·µÄÊýÁ¿
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param productId
 	 * @param partsId
 	 * @return
@@ -14,7 +14,7 @@ public interface ProductDao {
 	public Integer getTotalCount(Integer productId, Integer partsId);
 
 	/**
-	 * ¸ù¾ÝÌõ¼þ²åÈëÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param productId
 	 * @param partsId
 	 * @param startIndex
@@ -24,41 +24,41 @@ public interface ProductDao {
 	public List<Product> findProductsByInfo(Integer productId, Integer partsId, Integer startIndex, Integer pageSize);
 
 	/**
-	 * ¸ù¾ÝÉÌÆ·Id²éÑ¯ÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Idï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param id
 	 * @return
 	 */
 	public Product findProductById(Integer id);
 	/**
-	 * ¸üÐÂÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param product
 	 */
 	public int updateProduct(Product product);
 	/**
-	 * É¾³ýÄ³¸öÓÃ»§¹ºÎï³µËùÓÐÉÌÆ·
+	 * É¾ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	 * @param userid
 	 */
 	public int deleteCartProduct(Integer userid);
 	/**
-	 * ²éÕÒÈÈÃÅÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	 * @param num
 	 * @return
 	 */
 	public List<Product> findHotProducts(Integer num);
 	/**
-	 * ¸ù¾ÝÉÌÆ·ÀàÐÍ²éÑ¯ÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Í²ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param  categoryId
 	 * @return
 	 */
 	public List<Product> findProductsByProductCategory(int  categoryId);
 	/**
-	 * ¸ù¾ÝÌõ¼þ»ñµÃ×Ü¼ÇÂ¼Êý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 	 * @param product
 	 * @return
 	 */
 	public Integer getTotalCount(Product product);
 	/**
-	 * ¸ù¾ÝÌõ¼þ·ÖÒ³²éÑ¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯
 	 * @param product
 	 * @param startIndex
 	 * @param pageSize

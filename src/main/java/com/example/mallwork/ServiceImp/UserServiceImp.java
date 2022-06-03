@@ -1,7 +1,7 @@
 package com.example.mallwork.ServiceImp;
 
 import com.example.mallwork.Common.SverResponse;
-import com.example.mallwork.Dao.UserDao;
+import com.example.mallwork.dao.UserDao;
 import com.example.mallwork.Entity.User;
 import com.example.mallwork.Service.UserService;
 import com.example.mallwork.Tools.ConstUtil;
@@ -17,163 +17,163 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImp implements UserService {
-	//´´½¨actionuserdao¶ÔÏó
-	@Autowired//×Ô¶¯×°ÔØ¶ÔÏó
+	//ï¿½ï¿½ï¿½ï¿½actionuserdaoï¿½ï¿½ï¿½ï¿½
+	@Autowired//ï¿½Ô¶ï¿½×°ï¿½Ø¶ï¿½ï¿½ï¿½
 	private UserDao actionUserDao;
 
 	@Override
 	public SverResponse<User> doLogin(String account, String password) {
 		// TODO Auto-generated method stub
-		//1.ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñ´æÔÚ
+		//1.ï¿½Ğ¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		int rs = actionUserDao.checkUserByAccount(account);
 		if (rs==0) {
-			return SverResponse.createByErrorMessage("ÓÃ»§²»´æÔÚ");
+			return SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.¸ù¾İÓÃ»§ÃûÓëÃÜÂë²éÕÒ²¢ÇÒ¼ÓÃÜÃÜÂë
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String md5pwd = MD5Util.MD5Encode(password,"utf-8",false);
 		User user=actionUserDao.findUserByAccountAndPassword(account, md5pwd);
 
-		//3.ÅĞ¶ÏÓÃ»§ÊÇ·ñ´æÔÚ£¬²¢¸ø³öĞÅÏ¢ÌáÊ¾
+		//3.ï¿½Ğ¶ï¿½ï¿½Ã»ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾
 		if (user==null) {
-			return SverResponse.createByErrorMessage("ÃÜÂë´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//ÖÃ¿ÕÃÜÂë
+		//ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		user.setPassword(StringUtils.EMPTY);
-		return SverResponse.createRespBySuccess("µÇÂ¼³É¹¦£¡",user);
+		return SverResponse.createRespBySuccess("ï¿½ï¿½Â¼ï¿½É¹ï¿½ï¿½ï¿½",user);
 	}
 	
 	/**
-	 * ÓÃ»§×¢²á
+	 * ï¿½Ã»ï¿½×¢ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<String> doRegister(User user) {
-		//1.¼ì²éÓÃ»§ÃûÊÇ·ñ´æÔÚ
+		//1.ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		SverResponse<String> resp =  checkValidation(user.getAccount(), ConstUtil.TYPE_ACCOUNT);
 		if (!resp.isSuccess()) {
 			return resp;
 		}
-		//2.¼ì²éÓÊÏäÊÇ·ñ±»×¢²á
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½×¢ï¿½ï¿½
 		resp =  checkValidation(user.getEmail(), ConstUtil.TYPE_EMAIL);
 		if (!resp.isSuccess()) {
 			return resp;
 		}
-		//4.Ö¸¶¨ÓÃ»§½ÇÉ«£¬Í¨¹ıÇ°¶Ë×¢²áµÄÓÃ»§¶¼ÎªÆÕÍ¨ÓÃ»§
+		//4.Ö¸ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½É«ï¿½ï¿½Í¨ï¿½ï¿½Ç°ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Îªï¿½ï¿½Í¨ï¿½Ã»ï¿½
 		user.setRole(ConstUtil.Role.ROLE_CUSTOMER);
-		//5.ÃÜÂë¼ÓÃÜ
+		//5.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		user.setPassword(MD5Util.MD5Encode(user.getPassword(),"utf-8", false));
-		//6.Ö´ĞĞdao²ã×¢²á
+		//6.Ö´ï¿½ï¿½daoï¿½ï¿½×¢ï¿½ï¿½
 		Date curDate = new Date();
 		user.setCreate_time(curDate);
 		user.setUpData_time(curDate);
 		int rs = actionUserDao.insertUser(user);
 		if (rs==0) {
-			return SverResponse.createByErrorMessage("×¢²áÊ§°Ü£¡");
+			return SverResponse.createByErrorMessage("×¢ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 		}
-		return SverResponse.createRespBySuccessMessage("×¢²á³É¹¦£¡");
+		return SverResponse.createRespBySuccessMessage("×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 	}
 	/**
-	 * ĞÅÏ¢Ğ£ÑéÑéÖ¤
+	 * ï¿½ï¿½Ï¢Ğ£ï¿½ï¿½ï¿½ï¿½Ö¤
 	 */
 	@Override
 	public SverResponse<String> checkValidation(String str, String type) {
-		//1.ÅĞ¶Ï×Ö·û´´³¤¶Ètype²»Îª¿Õ
-		//2.ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÒÑ´æÔÚ
+		//1.ï¿½Ğ¶ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½typeï¿½ï¿½Îªï¿½ï¿½
+		//2.ï¿½Ğ¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½
 		if (StringUtils.isNoneBlank(type)) {
 			if (ConstUtil.TYPE_ACCOUNT.equals(type)) {
 				int rs = actionUserDao.checkUserByAccount(str);
 				if (rs>0) {
-					return	SverResponse.createByErrorMessage("ÓÃ»§ÃûÒÑ´æÔÚ£¡");
+					return	SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½Ú£ï¿½");
 				}
 			}
 		}
-		//3.ÑéÖ¤ÓÊÏäÊÇ·ñÒÑ´æÔÚ
+		//3.ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½
 		if (StringUtils.isNoneBlank(type)) {
 			if (ConstUtil.TYPE_EMAIL.equals(type)) {
 				int rs = actionUserDao.checkUserByEamil(str);
 				if (rs>0) {
-					return	SverResponse.createByErrorMessage("ËùÓÃÓÊÏäÒÑ´æÔÚ£¡");
+					return	SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½Ú£ï¿½");
 				}
 			}
 		}
-		//4.ÑéÖ¤ÊÖ»úºÅÊÇ·ñÒÑ´æÔÚ
+		//4.ï¿½ï¿½Ö¤ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½
 		if (StringUtils.isNoneBlank(type)) {
 			if (ConstUtil.TYPE_PHONE.equals(type)) {
 				int rs = actionUserDao.checkUserByPhone(str);
 				if (rs>0) {
-					return	SverResponse.createByErrorMessage("ËùÓÃÊÖ»úºÅÒÑ´æÔÚ£¡");
+					return	SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½Ú£ï¿½");
 				}
 			}
 		}else {
-			return SverResponse.createByErrorMessage("ĞÅÏ¢Àà±ğ´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		return SverResponse.createRespBySuccessMessage("ĞÅÏ¢ÑéÖ¤³É¹¦");
+		return SverResponse.createRespBySuccessMessage("ï¿½ï¿½Ï¢ï¿½ï¿½Ö¤ï¿½É¹ï¿½");
 	}
 	/**
-	 * Í¨¹ıÓÃ»§Ãû»ñÈ¡ÓÃ»§¶ÔÏó
+	 * Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<User> findUserByAccount(String account) {
-		//1.Í¨¹ıÓÃ»§Ãû²éÕÒµ½ÓÃ»§
+		//1.Í¨ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ã»ï¿½
 		User user = actionUserDao.findUserByAccount(account);
 		if (user==null) {
-			return SverResponse.createByErrorMessage("ÓÃ»§Ãû´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.ÃÜÂëÖÃ¿Õ
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½
 		user.setPassword(StringUtils.EMPTY);
-		//3.°²È«ÎÊÌâ´ğ°¸ÖÃ¿Õ
+		//3.ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½
 		user.setAsw(StringUtils.EMPTY);
 		return SverResponse.createRespBySuccess(user);
 	}
 	/**
-	 * Ğ£Ñé°²È«ÎÊÌâ´ğ°¸
+	 * Ğ£ï¿½é°²È«ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<String> checkUserAnswer(String account, String question, String asw) {
-		//1.»ñÈ¡Ğ£Ñé½á¹û
+		//1.ï¿½ï¿½È¡Ğ£ï¿½ï¿½ï¿½ï¿½
 		int rs = actionUserDao.checkUserAnswer(account,question,asw);
 		if (rs>0) {
-			//2.´ğ°¸ÕıÈ·£¬Éú³Étoken
+			//2.ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½token
 			String token = UUID.randomUUID().toString();
-			//3.·ÅÈë»º´æ
+			//3.ï¿½ï¿½ï¿½ë»ºï¿½ï¿½
 			TokenCache.setCacheData(TokenCache.PREFIX+account, token);
 			return SverResponse.createRespBySuccessMessage(token);
 		}
-		return SverResponse.createByErrorMessage("ÎÊÌâ´ğ°¸´íÎó!");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ğ°¸´ï¿½ï¿½ï¿½!");
 	}
 	
 	/**
-	 * ÖØÖÃÃÜÂë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<String> resetPassword(Integer userId, String password) {
-		//1.ÃÜÂë¼ÓÃÜ
+		//1.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String pwd = MD5Util.MD5Encode(password, "utf-8", false);
-		//2.»ñÈ¡user¶ÔÏó
+		//2.ï¿½ï¿½È¡userï¿½ï¿½ï¿½ï¿½
 		User user =actionUserDao.findUserById(userId);
-		//3.¸üĞÂÃÜÂë
+		//3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		user.setPassword(pwd);
 		user.setUpData_time(new Date());
 		int rs = actionUserDao.updateUserInfo(user);
 		if (rs>0) {
-			return SverResponse.createRespBySuccessMessage("ÃÜÂëĞŞ¸Ä³É¹¦£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä³É¹ï¿½ï¿½ï¿½");
 		}
-		return SverResponse.createByErrorMessage("ÃÜÂëĞŞ¸ÄÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ¸üĞÂÓÃ»§ĞÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public SverResponse<User> updateUserInfo(UserVo userVo) {
-		//1.¸ù¾İid»ñÈ¡user¶ÔÏó
+		//1.ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½È¡userï¿½ï¿½ï¿½ï¿½
 		User updateUser = actionUserDao.findUserById(userVo.getId());
-		//2.¸üĞÂĞŞ¸ÄÊı¾İ
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		updateUser.setAccount(userVo.getAccount());
 		updateUser.setEmail(userVo.getEmail());
 		updateUser.setPhone(userVo.getPhone());
 		updateUser.setUpData_time(new Date());
 		updateUser.setAge(userVo.getAge());
-		//3.ÅĞ¶ÏÄĞÅ®
-		if (userVo.getSex().equals("ÄĞ")) {
+		//3.ï¿½Ğ¶ï¿½ï¿½ï¿½Å®
+		if (userVo.getSex().equals("ï¿½ï¿½")) {
 			updateUser.setSex(1);
 		}else {
 			updateUser.setSex(0);
@@ -181,46 +181,46 @@ public class UserServiceImp implements UserService {
 		updateUser.setName(userVo.getName());
 		int rs =actionUserDao.updateUserInfo(updateUser);
 		if (rs>0) {
-			return SverResponse.createRespBySuccess("ÓÃ»§ĞÅÏ¢ĞŞ¸Ä³É¹¦", updateUser);
+			return SverResponse.createRespBySuccess("ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½Ş¸Ä³É¹ï¿½", updateUser);
 		}
-		return SverResponse.createByErrorMessage("ÓÃ»§ĞÅÏ¢ĞŞ¸ÄÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½Ş¸ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ÖØÉèÃÜÂë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<String> updatePassword(User user, String newPassword, String oldPassword) {
-		//1.¼ì²â¾ÉÃÜÂëÊÇ·ñÕıÈ·
+		//1.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È·
 		oldPassword = MD5Util.MD5Encode(oldPassword, "utf-8", false);
 		int rs = actionUserDao.checkPassword(user.getAccount(),oldPassword);
 		if (rs==0) {
-			return SverResponse.createByErrorMessage("Ô­Ê¼ÃÜÂë´íÎó£¡");
+			return SverResponse.createByErrorMessage("Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.½«ĞÂÃÜÂë²åÈëÊı¾İ¿â
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½
 		newPassword = MD5Util.MD5Encode(newPassword, "utf-8", false);
 		user.setPassword(newPassword);
 		user.setUpData_time(new Date());
 		rs = actionUserDao.updateUserInfo(user);
 		if (rs>0) {
-			return SverResponse.createRespBySuccessMessage("ÃÜÂëĞŞ¸Ä³É¹¦");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Ä³É¹ï¿½");
 		}
-		return SverResponse.createByErrorMessage("ÃÜÂëĞŞ¸ÄÊ§°Ü");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½Ê§ï¿½ï¿½");
 	}
 	/**
-	 * ²éÑ¯ÃÜÂëÎÊÌâ
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<String> getUserQuestion(String account) {
-		//ÅĞ¶Ï²ÎÊı
+		//ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (account==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		User user= actionUserDao.findUserByAccount(account);
 		if(user==null) {
-			return SverResponse.createByErrorMessage("ÓÃ»§Ãû´íÎó");
+			return SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		if(user.getQuestion().trim().equals("")||user.getQuestion()==null) {
-			return SverResponse.createByErrorMessage("Î´ÉèÖÃÃÜÂëÎÊÌâ!");
+			return SverResponse.createByErrorMessage("Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 		}else {
 			return SverResponse.createRespBySuccess(user.getQuestion());
 		}

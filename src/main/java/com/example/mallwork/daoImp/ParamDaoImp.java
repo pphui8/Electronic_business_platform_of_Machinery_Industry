@@ -1,6 +1,6 @@
-package com.example.mallwork.DaoImp;
+package com.example.mallwork.daoImp;
 
-import com.example.mallwork.Dao.ParamDao;
+import com.example.mallwork.dao.ParamDao;
 import com.example.mallwork.Entity.Param;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -29,7 +29,7 @@ public class ParamDaoImp implements ParamDao {
 		
 	}
 	/**
-	 * ¸ù¾Ý½Úµãid²éÕÒ¶ÔÏó
+	 * ï¿½ï¿½ï¿½Ý½Úµï¿½idï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public Param findParamById(Integer id) {

@@ -1,4 +1,4 @@
-package com.example.mallwork.Controller;
+package com.example.mallwork.controller;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.Entity.Param;
@@ -18,7 +18,7 @@ public class ParamController {
 	@Autowired
 	private ParamService actionParamService;
 	/**
-	 * ²éÕÒËùÓÐÉÌÆ·ÀàÐÍ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	 * @param session
 	 * @return
 	 */

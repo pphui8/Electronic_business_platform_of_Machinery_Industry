@@ -1,7 +1,7 @@
 package com.example.mallwork.ServiceImp;
 
 import com.example.mallwork.Common.SverResponse;
-import com.example.mallwork.Dao.AddrDao;
+import com.example.mallwork.dao.AddrDao;
 import com.example.mallwork.Entity.Address;
 import com.example.mallwork.Service.AddrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,15 @@ public class AddrServiceImp implements AddrService {
 	private AddrDao actionAddrDao;
 	
 	/**
-	 * ĞÂÔöÊÕ»õµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·
 	 */
 	@Override
 	public SverResponse<String> addAddress(Address addr) {
-		//1.ÅĞ¶Ï²ÎÊı
+		//1.ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (addr==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.ÅĞ¶ÏÒÑÓĞµØÖ·ÖĞÊÇ·ñº¬ÓĞÄ¬ÈÏµØÖ·£¬Èç¹ûÃ»ÓĞĞÂÔöµØÖ·ÎªÄ¬ÈÏµØÖ·£¬·ñÔòÎªÒ»°ãµØÖ·
+		//2.ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ö·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ÎªÄ¬ï¿½Ïµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÒ»ï¿½ï¿½ï¿½Ö·
 		int count = actionAddrDao.findDefaultAddrByUserId(addr.getUserId());
 		System.out.println(count);
 		if (count==0) {
@@ -33,82 +33,82 @@ public class AddrServiceImp implements AddrService {
 		else {
 			addr.setDefaultAddr(0);
 		}
-		//3.Ìí¼ÓµØÖ·ÆäËûÊôĞÔ
+		//3.ï¿½ï¿½Óµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		addr.setCreated(new Date());
 		addr.setUpdated(new Date());
 		
-		//4.²åÈëµØÖ·ĞÅÏ¢
+		//4.ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ï¢
 		int rs = actionAddrDao.instertAddress(addr);
-		//5.ÅĞ¶ÏÊÇ·ñ²åÈë³É¹¦
+		//5.ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½É¹ï¿½
 		if (rs>0) {
-			return SverResponse.createRespBySuccessMessage("Ôö¼ÓµØÖ·³É¹¦£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½Óµï¿½Ö·ï¿½É¹ï¿½ï¿½ï¿½");
 		}
-		return SverResponse.createByErrorMessage("µØÖ·Ôö¼ÓÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ¸üĞÂÊÕ»õµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ö·
 	 */
 	@Override
 	public SverResponse<String> updateAddress(Address addr) {
-		//1.ÅĞ¶Ï²ÎÊı
+		//1.ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (addr==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.Ìí¼ÓÆäËûÊôĞÔ
+		//2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		addr.setUpdated(new Date());
 		int rs  = actionAddrDao.updateAddress(addr);
 		if (rs>0) {
-			return SverResponse.createRespBySuccessMessage("¸üĞÂµØÖ·³É¹¦£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½Âµï¿½Ö·ï¿½É¹ï¿½ï¿½ï¿½");
 		}
-		return SverResponse.createByErrorMessage("µØÖ·¸üĞÂÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	
 	/**
-	 * ²éÑ¯Ä³ÓÃ»§ËùÓĞµØÖ·ĞÅÏ¢
+	 * ï¿½ï¿½Ñ¯Ä³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ö·ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public SverResponse<List<Address>> findAddressByUserId(Integer userId) {
-		//1.ÅĞ¶Ï²ÎÊı
+		//1.ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (userId==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		List<Address> list = actionAddrDao.findAddressByUserId(userId);
 		return SverResponse.createRespBySuccess(list);
 	}
 	/**
-	 * É¾³ıµØÖ·
+	 * É¾ï¿½ï¿½ï¿½ï¿½Ö·
 	 */
 	@Override
 	public SverResponse<String> deleteAddress(Integer userId, Integer id) {
-		//1.ÅĞ¶Ï²ÎÊı
+		//1.ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (id==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.É¾³ıµØÖ·£¬¶Ôdel_state×Ö¶Î½øĞĞĞŞ¸Ä
+		//2.É¾ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½del_stateï¿½Ö¶Î½ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½
 		Address Address = new Address();
 		Address.setId(id);
 		Address.setDelState(1);
 		Address.setUpdated(new Date());
 		int rs = actionAddrDao.updateAddress(Address);
 		if (rs>0) {
-			return SverResponse.createRespBySuccessMessage("É¾³ıµØÖ·³É¹¦£¡");
+			return SverResponse.createRespBySuccessMessage("É¾ï¿½ï¿½ï¿½ï¿½Ö·ï¿½É¹ï¿½ï¿½ï¿½");
 		}
-		return SverResponse.createByErrorMessage("µØÖ·É¾³ıÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½Ö·É¾ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ¸üĞÂÄ¬ÈÏµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·
 	 */
 	@Override
 	public SverResponse<String> updateDeaufultAddress(Integer userId, Integer id) {
 		int a;
-		//1.ÅĞ¶Ï²ÎÊı
+		//1.ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½
 		if (id==null||userId==null) {
-			return SverResponse.createByErrorMessage("²ÎÊı´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.¶ÁÈ¡Ô­ÏÈÄ¬ÈÏµØÖ·
+		//2.ï¿½ï¿½È¡Ô­ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·
 		Address oldAddress = actionAddrDao.findDefaultAddr(userId);
 		if (oldAddress!=null) {
-			//È¡ÏûÄ¬ÈÏµØÖ·
+			//È¡ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·
 			oldAddress.setDefaultAddr(0);
 			oldAddress.setUpdated(new Date());
 //			System.out.println(oldAddress.getUserId());
@@ -116,18 +116,18 @@ public class AddrServiceImp implements AddrService {
 //			a= actionAddrDao.updateAddress(oldAddress);
 //			System.out.println(a);
 			if (actionAddrDao.updateAddress(oldAddress)>=0) {
-				return SverResponse.createByErrorMessage("ÉèÖÃÄ¬ÈÏµØÖ·Ê§°Ü£¡");
+				return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·Ê§ï¿½Ü£ï¿½");
 			}
 		}
-		//3.ÉèÖÃÄ¬ÈÏµØÖ·
+		//3.ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·
 		Address newAddress = new Address();
 		newAddress.setDefaultAddr(1);
 		newAddress.setId(id);
 		newAddress.setUpdated(new Date());
 		
 		if (actionAddrDao.updateAddress(newAddress)<=0) {
-			return SverResponse.createByErrorMessage("ÉèÖÃÄ¬ÈÏµØÖ·Ê§°Ü£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·Ê§ï¿½Ü£ï¿½");
 		}
-		return SverResponse.createRespBySuccessMessage("Ä¬ÈÏµØÖ·ÉèÖÃ³É¹¦£¡");
+		return SverResponse.createRespBySuccessMessage("Ä¬ï¿½Ïµï¿½Ö·ï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½");
 	}
 }

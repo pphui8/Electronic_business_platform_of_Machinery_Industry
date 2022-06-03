@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.User;
 

@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.Order;
 
@@ -7,14 +7,14 @@ import java.util.List;
 public interface OrderDao {
 	
 	/**
-	 * »ñÈ¡ÓÃ»§¶©µ¥×ÜÊý(¸÷ÖÖ×´Ì¬ÏÂ£©
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Â£ï¿½
 	 * @param userid
 	 * @param status
 	 * @return
 	 */
 	public int getTotalRecord(Integer userid, Integer status);
 	/**
-	 * »ñÈ¡ÓÃ»§¶©µ¥·ÖÒ³ÁÐ±í
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½Ð±ï¿½
 	 * @param userid
 	 * @param status
 	 * @param startIndex
@@ -22,20 +22,20 @@ public interface OrderDao {
 	 */
 	public List<Order> findOrders(Integer userid, Integer status, int startIndex, int pageSize);
 	/**
-	 * ¸ù¾ÝÓÃ»§id¼°¶©µ¥ºÅ²éÑ¯¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	 * @param userid
 	 * @param orderNo
 	 * @return
 	 */
 	public Order findOrderByUserAndOrderNo(Integer userid, Long orderNo);
 	/**
-	 * ¸üÐÂ¶©µ¥ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @param updateOrder
 	 * @return
 	 */
 	public int updateOrder(Order updateOrder);
 	/**
-	 * ±£´æ¶©µ¥ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½æ¶©ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @param order
 	 * @return
 	 */

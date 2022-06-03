@@ -2,7 +2,7 @@
 package com.example.mallwork.ServiceImp;
 
 import com.example.mallwork.Common.SverResponse;
-import com.example.mallwork.Dao.*;
+import com.example.mallwork.dao.*;
 import com.example.mallwork.Entity.*;
 import com.example.mallwork.Service.OrderService;
 import com.example.mallwork.Tools.CalcUtil;
@@ -35,23 +35,23 @@ public class OrderServiceImp implements OrderService {
 	@Autowired
 	private ProductDao actionProductDao;
 	/**
-	 * ²éÑ¯ËùÓÐ¶©µ¥ÁÐ±í·ÖÒ³ÏÔÊ¾
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ò³ï¿½ï¿½Ê¾
 	 */
 	@Override
 	public SverResponse<PageBean<OrderVo>> findOrder(Integer userid, Integer status, int pageNum, int pageSize) {
-		//1.ÅÐ¶ÏuseridÊÇ·ñÎª¿Õ
+		//1.ï¿½Ð¶ï¿½useridï¿½Ç·ï¿½Îªï¿½ï¿½
 		if (userid==null) {
-			return SverResponse.createByErrorMessage("²ÎÊý´íÎó");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//2.²éÕÒ·ûºÏÌõ¼þµÄ×Ü¼ÇÂ¼Êý
+		//2.ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 		int totalRecord = OrderDao.getTotalRecord(userid,status);
 //		System.out.print(totalRecord);
-		//3.´´½¨·ÖÒ³·â×°¶ÔÏó
+		//3.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
 		PageBean<OrderVo> pageBean = new PageBean<>(pageNum, pageSize, totalRecord);
 
-		//4.¶ÁÈ¡Êý¾Ý
+		//4.ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 		List<Order>orders=OrderDao.findOrders(userid,status,pageBean.getStartIndex(),pageSize);
-		//5.·â×°Vo
+		//5.ï¿½ï¿½×°Vo
 		List<OrderVo> voList = Lists.newArrayList();
 		for (Order order:orders) {
 			voList.add(createOrderVo1(order,false));
@@ -61,7 +61,7 @@ public class OrderServiceImp implements OrderService {
 		return SverResponse.createRespBySuccess(pageBean);
 	}
 	/**
-	 * ´´½¨¶©µ¥·â×°Vo
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×°Vo
 	 * @param order
 	 * @param orderItems
 	 * @return
@@ -70,23 +70,23 @@ public class OrderServiceImp implements OrderService {
 		OrderVo orderVo = new OrderVo();
 		setNormalProperty(order,orderVo);
 		setAddressProperty(order,orderVo,true);
-		//ÉèÖÃ¶©µ¥Ïî
+		//ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		setOrderItemProperty(orderItems,orderVo);
 		return orderVo;
 	}
-	//·â×°vo
+	//ï¿½ï¿½×°vo
 	private OrderVo createOrderVo1(Order order,boolean hasAddress) {
 		OrderVo orderVo = new OrderVo();
 		setNormalProperty(order,orderVo);
 		setAddressProperty(order,orderVo,hasAddress);
-		//ÉèÖÃ¶©µ¥Ïî
+		//ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<OrderItem> orderItems = OrderItemDao.getItemsByOrderNo(order.getOrderNo());
 		setOrderItemProperty(orderItems,orderVo);
 		return orderVo;
 		
 	}
 	/**
-	 * ·â×°¶©µ¥ÏîÊôÐÔ
+	 * ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param orderItems
 	 * @param orderVo
 	 */
@@ -98,7 +98,7 @@ public class OrderServiceImp implements OrderService {
 		orderVo.setOrderItems(items);
 	}
 	/**
-	 * ·â×°¶©µ¥Ïîvo
+	 * ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vo
 	 * @param orderItem
 	 * @return
 	 */
@@ -115,7 +115,7 @@ public class OrderServiceImp implements OrderService {
 		return itemVo;
 	}
 	/**
-	 * ·â×°µØÖ·ÊôÐÔ
+	 * ï¿½ï¿½×°ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½
 	 * @param order
 	 * @param orderVo
 	 * @param hasAddress
@@ -132,7 +132,7 @@ public class OrderServiceImp implements OrderService {
 		}
 	}
 	/**
-	 * ·â×°µØÖ·vo
+	 * ï¿½ï¿½×°ï¿½ï¿½Ö·vo
 	 * @param address
 	 * @return
 	 */
@@ -149,7 +149,7 @@ public class OrderServiceImp implements OrderService {
 		return AddressVo;
 	}
 	/**
-	 * ·â×°¶©µ¥µÄÊôÐÔ
+	 * ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param order
 	 * @param orderVo
 	 * @return 
@@ -158,12 +158,12 @@ public class OrderServiceImp implements OrderService {
 		orderVo.setOrderNo(order.getOrderNo());
 		orderVo.setAmount(order.getAmount());
 		orderVo.setType(order.getType());
-		orderVo.setTypeDess(ConstUtil.PaymentType.getTypeDesc(order.getType()));//ÓÃ¹¤¾ßÀà»ñÈ¡
+		orderVo.setTypeDess(ConstUtil.PaymentType.getTypeDesc(order.getType()));//ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡
 		orderVo.setFieight(order.getFreight());
 		orderVo.setStatus(order.getStatus());
 		orderVo.setStatusDesc(ConstUtil.OrderStatus.getStatusDesc(order.getStatus()));
 		orderVo.setAddrId(order.getAddrId());
-		//Ê±¼ä
+		//Ê±ï¿½ï¿½
 		orderVo.setPaymentTime(DateUtils.date2Str(order.getPaymentTime()));
 		orderVo.setDeliveryTime(DateUtils.date2Str(order.getDeliveryTime()));
 		orderVo.setFinishTime(DateUtils.date2Str(order.getFinishTime()));
@@ -171,22 +171,22 @@ public class OrderServiceImp implements OrderService {
 		orderVo.setCreated(DateUtils.date2Str(order.getCreated()));
 	}
 	/**
-	 * È¡Ïû¶©µ¥
-	 * È·ÈÏÊÕ»õ
+	 * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * È·ï¿½ï¿½ï¿½Õ»ï¿½
 	 */
 	@Override
 	public SverResponse<String> cancelOrder(Integer userid, Long orderNo) {
-		//1.¸ù¾Ý¶©µ¥ºÅ²éÑ¯¶©µ¥
+		//1.ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 		Order order = OrderDao.findOrderByUserAndOrderNo(userid,orderNo);
-		//2.ÅÐ¶Ï¶©µ¥ÊÇ·ñ´æÔÚ
+		//2.ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		if (order==null) {
-			return SverResponse.createByErrorMessage("ÓÃ»§¶©µ¥²»´æÔÚ£¡");
+			return SverResponse.createByErrorMessage("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½");
 		}
-		//3.ÅÐ¶Ï¶©µ¥ÊÇ·ñÒÑ¸¶¿î
+		//3.ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ñ¸ï¿½ï¿½ï¿½
 		if (order.getStatus()==ConstUtil.OrderStatus.ORDER_PAID) {
-			return SverResponse.createByErrorMessage("¶©µ¥ÒÑ¸¶¿î²»ÄÜÈ¡Ïû£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¸ï¿½ï¿½î²»ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½");
 		}
-		//4.ÅÐ¶Ï×´Ì¬ÐÞ¸ÄµØÖ·ÐÅÏ¢
+		//4.ï¿½Ð¶ï¿½×´Ì¬ï¿½Þ¸Äµï¿½Ö·ï¿½ï¿½Ï¢
 		Order updateOrder = new Order();
 		updateOrder.setId(order.getId());
 		updateOrder.setUpDate(new Date());
@@ -194,83 +194,83 @@ public class OrderServiceImp implements OrderService {
 			updateOrder.setStatus(ConstUtil.OrderStatus.ORDER_CANCELED);
 			int role = OrderDao.updateOrder(updateOrder);
 			if (role>0) {
-				return SverResponse.createRespBySuccessMessage("¶©µ¥ÒÑ¾­È¡Ïû£¡");
+				return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½È¡ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
-		//½»Ò×Íê³É
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (order.getStatus()==3) {
 			updateOrder.setStatus(ConstUtil.OrderStatus.ORDER_SUCCESS);
 			int role = OrderDao.updateOrder(updateOrder);
 			if (role>0) {
-				return SverResponse.createRespBySuccessMessage("¶©µ¥ÒÑ¾­È·ÈÏÊÕ»õ£¡");
+				return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½È·ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½");
 			}
 		}
-		return SverResponse.createByErrorMessage("¶©µ¥È¡ÏûÊ§°Ü£¡");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ¸ù¾Ý¶©µ¥ºÅ»ñÈ¡¶©µ¥ÏêÇé
+	 * ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½Å»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<OrderVo> findOrderDetail(Integer userid, Long orderNo) {
-		//ÅÐ¶Ï²ÎÊýÊÇ·ñÕýÈ·
+		//ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È·
 		if (userid == null || orderNo == null) {
-			return SverResponse.createByErrorMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//²éÕÒ¶©µ¥·â×°
+		//ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½×°
 		Order order = OrderDao.findOrderByUserAndOrderNo(userid, orderNo);
 		if (order==null) {
-			return SverResponse.createByErrorMessage("¸ÃÓÃ»§¶©µ¥²»´æÔÚ£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½");
 		}
 		OrderVo orderVo = createOrderVo1(order, true);
 		return SverResponse.createRespBySuccess(orderVo);
 	}
 	/**
-	 * ´´½¨¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<OrderVo> generateOrder(Integer userid, Integer addrId) {
-		//1.ÌáÈ¡¹ºÎï³µÖÐÉÌÆ·ÐÅÏ¢
+		//1.ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 		List<Cart> carts = CartDao.findCartByUser(userid);
-		//2.¼ÆËã¹ºÎï³µÖÐÃ¿¸öÉÌÆ·¼Û¸ñ²¢Éú³É¶©µ¥Ïî
+		//2.ï¿½ï¿½ï¿½ã¹ºï¿½ï³µï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Û¸ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		SverResponse resp = this.cart2OrderItem(userid,carts);
 		if (!resp.isSuccess()) {
 			return resp;
 		}
-		//3.È¡³ö¶©µ¥ÏîÖÐ¼Û¸ñ²¢¼ÆËã×Ü¼Û¸ñ
+		//3.È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼Û¸ñ²¢¼ï¿½ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
 		List<OrderItem> orderItems = (List<OrderItem>) resp.getData();
 		BigDecimal totalPrice = this.calcOrderTotalPrice(orderItems);
-		//4.Éú³É¶©µ¥²åÈëÊý¾Ý
+		//4.ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Order order = saveOrder(userid,addrId,totalPrice);
 		if (order==null) {
-			return SverResponse.createByErrorMessage("¶©µ¥²úÉú´íÎó£¬Çë¼ì²éºóÖØÐÂÌá£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á£¡");
 		}
 		if (CollectionUtils.isEmpty(orderItems)) {
-			return SverResponse.createByErrorMessage("¶©µ¥ÏîÎª¿Õ£¬ÇëÑ¡ÔñÒª¹ºÂòµÄÉÌÆ·£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½");
 		}
-		//5.ÅúÁ¿²åÈë¶©µ¥Ïî
+		//5.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½ï¿½ï¿½
 		for(OrderItem orderItem:orderItems) {
-			//Îª¶©µ¥ÏîÉèÖÃÖ÷¼ü
+			//Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			orderItem.setOrderNo(order.getOrderNo());
 			OrderItemDao.batchInsert(orderItems);
 		}
-		//6.¼õÉÙ¿â´æ
+		//6.ï¿½ï¿½ï¿½Ù¿ï¿½ï¿½
 		for(OrderItem orderItem:orderItems) {
 			Product Product = actionProductDao.findProductById(orderItem.getGoodsId());
-			//¼õÉÙÊýÁ¿
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Product.setStock(Product.getStock() - orderItem.getQuantity());
 			Product.setupdated(new Date());
-			//¸üÐÂ¿â´æ
+			//ï¿½ï¿½ï¿½Â¿ï¿½ï¿½
 			actionProductDao.updateProduct(Product);
 		}
-		//7.Çë¿Õ¹ºÎï³µ
+		//7.ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 		actionProductDao.deleteCartProduct(userid);
-		//8.·â×°·µ»ØÇ°¶Ë
+		//8.ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
 		OrderVo orderVo = createOrderVo(order, orderItems);
 		return SverResponse.createRespBySuccess(orderVo);
 	}
 
 	/**
-	 * ±£´æ¶©µ¥
+	 * ï¿½ï¿½ï¿½æ¶©ï¿½ï¿½
 	 * @param userid
 	 * @param addrId
 	 * @param totalPrice
@@ -278,19 +278,19 @@ public class OrderServiceImp implements OrderService {
 	 */
 	private Order saveOrder(Integer userid, Integer addrId, BigDecimal totalPrice) {
 		Order order = new Order();
-		//Éú³É¶©µ¥ºÅ
+		//ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		Long currentTime = System.currentTimeMillis();
 		Long orderNo = currentTime+new Random().nextInt(100);
 		order.setOrderNo(orderNo);
-		order.setStatus(ConstUtil.OrderStatus.ORDER_NO_PAY);//ÐÞ¸ÄÄ¬ÈÏ×´Ì¬Î´¸¶¿î
-		order.setType(ConstUtil.PaymentType.PAY_ON_LINE);//Ö§¸¶×´Ì¬ÔÚÏßÖ§¸¶
-		order.setFreight(0);//ÓÊ¼Ä×´Ì¬
-		order.setAmount(totalPrice);//¶©µ¥×Ü¶î
+		order.setStatus(ConstUtil.OrderStatus.ORDER_NO_PAY);//ï¿½Þ¸ï¿½Ä¬ï¿½ï¿½×´Ì¬Î´ï¿½ï¿½ï¿½ï¿½
+		order.setType(ConstUtil.PaymentType.PAY_ON_LINE);//Ö§ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+		order.setFreight(0);//ï¿½Ê¼ï¿½×´Ì¬
+		order.setAmount(totalPrice);//ï¿½ï¿½ï¿½ï¿½ï¿½Ü¶ï¿½
 		order.setAddrId(addrId);
 		order.setuId(userid);
 		order.setUpDate(new Date());
 		order.setCreated(new Date());
-		//²åÈë¶©µ¥
+		//ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½
 		int rs = OrderDao.insertOrder(order);
 		if (rs>0) {
 			return order;
@@ -298,7 +298,7 @@ public class OrderServiceImp implements OrderService {
 		return null;
 	}
 	/**
-	 * ¼ÆËãÉÌÆ·×Ü¼Û¸ñ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ü¼Û¸ï¿½
 	 * @param orderItems
 	 * @return
 	 */
@@ -310,37 +310,37 @@ public class OrderServiceImp implements OrderService {
 		return totalPrice;
 	}
 	/**
-	 * ½«¹ºÎï³µÖÐÉÌÆ·²¢·â×°Îª¶©µ¥Ïî
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½×°Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param userid
 	 * @param carts
 	 * @return
 	 */
 	private SverResponse cart2OrderItem(Integer userid, List<Cart> carts) {
 		List<OrderItem> items = Lists.newArrayList();
-		//ÅÐ¶Ï¹ºÎï³µÊÇ·ñÎª¿Õ
+		//ï¿½Ð¶Ï¹ï¿½ï¿½ï³µï¿½Ç·ï¿½Îªï¿½ï¿½
 		if (CollectionUtils.isEmpty(carts)) {
-			return SverResponse.createByErrorMessage("¹ºÎï³µÎª¿Õ£¬ÇëÑ¡ÔñÒª¹ºÂòµÄÉÌÆ·");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï³µÎªï¿½Õ£ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·");
 		}
 		for (Cart cart:carts) {
-			//²é¿´¹ºÎï³µÉÌÆ·×´Ì¬
+			//ï¿½é¿´ï¿½ï¿½ï¿½ï³µï¿½ï¿½Æ·×´Ì¬
 			Product product = actionProductDao.findProductById(cart.getProductId());
-			//²é¿´ÉÌÆ·×´Ì¬
+			//ï¿½é¿´ï¿½ï¿½Æ·×´Ì¬
 			if (ConstUtil.ProductStatus.STATUS_ON_SALE!=product.getStatus()) {
-				//ÉÌÆ·²»ÊÇÉÏ¼Ü×´Ì¬·µ»ØÌáÊ¾ÐÅÏ¢¡¢
-				return SverResponse.createByErrorMessage("ÓÐÏÂ¼ÜÉÌÆ·£¬²»ÄÜÔÚÏß¹ºÂò£¡");
+				//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½ï¿½
+				return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½");
 			}
-			//²é¿´¿â´æ
+			//ï¿½é¿´ï¿½ï¿½ï¿½
 			if (cart.getQuantity()>product.getStock()) {
-				return SverResponse.createByErrorMessage("ÉÌÆ·¿â´æ²»×ã£¡");
+				return SverResponse.createByErrorMessage("ï¿½ï¿½Æ·ï¿½ï¿½æ²»ï¿½ã£¡");
 			}
-			//·â×°¶©µ¥
+			//ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½
 			OrderItem orderItem = new OrderItem();
 			orderItem.setUserId(userid);
 			orderItem.setGoodsName(product.getName());
 			orderItem.setGoodsId(product.getId());
 			orderItem.setIconUrl(product.getIconUrl());
 			orderItem.setPrice(product.getPrice());
-			orderItem.setQuantity(cart.getQuantity());//ÊýÁ¿
+			orderItem.setQuantity(cart.getQuantity());//ï¿½ï¿½ï¿½ï¿½
 			orderItem.setTotalPrice(CalcUtil.mul(orderItem.getPrice().doubleValue(),orderItem.getQuantity().doubleValue()));
 			orderItem.setCreated(new Date());
 			orderItem.setUpdated(new Date());

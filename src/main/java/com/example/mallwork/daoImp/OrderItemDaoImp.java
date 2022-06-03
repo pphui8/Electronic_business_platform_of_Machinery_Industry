@@ -1,6 +1,6 @@
-package com.example.mallwork.DaoImp;
+package com.example.mallwork.daoImp;
 
-import com.example.mallwork.Dao.OrderItemDao;
+import com.example.mallwork.dao.OrderItemDao;
 import com.example.mallwork.Entity.OrderItem;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -19,7 +19,7 @@ public class OrderItemDaoImp implements OrderItemDao {
 			+ "goods_name as goodsName,icon_url as iconUrl,price,quantity,total_price as totalPrice"
 			+ "createde,updated";
 	/**
-	 * ¸ù¾Ý¶©µ¥ºÅ²éÑ¯¶©µ¥ÏêÇé
+	 * ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public List<OrderItem> getItemsByOrderNo(Long orderNo) {
@@ -33,7 +33,7 @@ public class OrderItemDaoImp implements OrderItemDao {
 		}
 	}
 	/**
-	 * ÅúÁ¿²åÈë¶©µ¥Ïî
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½ï¿½ï¿½
 	 */
 	
 	@Override

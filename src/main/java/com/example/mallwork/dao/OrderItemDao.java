@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.OrderItem;
 
@@ -7,13 +7,13 @@ import java.util.List;
 public interface OrderItemDao {
 	
 	/**
-	 * ¸ù¾Ý¶©µ¥ºÅ»ñµÃ¶©µ¥Ïî
+	 * ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½ï¿½Å»ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param orderNo
 	 * @return
 	 */
 	public List<OrderItem> getItemsByOrderNo(Long orderNo);
 	/**
-	 * ÅúÁ¿²åÈë¶©µ¥Ïî
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½ï¿½ï¿½
 	 * @param orderItems
 	 */
 	public int[] batchInsert(List<OrderItem> orderItems);

@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.Address;
 import java.util.List;
@@ -6,41 +6,41 @@ import java.util.List;
 public interface AddrDao {
 	
 	/**
-	 * ²éÑ¯ÊÇ·ñ´æÔÚÄ¬ÈÏµØÖ·
+	 * ï¿½ï¿½Ñ¯ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ïµï¿½Ö·
 	 * @param userId
 	 * @return
 	 */
 	public int findDefaultAddrByUserId(Integer userId);
 	
 	/**
-	 * ĞÂÔöÊÕ¼şµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½Ö·
 	 * @param addr
 	 * @return
 	 */
 	public int instertAddress(Address addr);
 	/**
-	 * ¸üĞÂÊÕ¼şµØÖ·
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½Ö·
 	 * @param addr
 	 * @return
 	 */
 
 	public int updateAddress(Address addr);
 	/**
-	 * ²éÑ¯ÓÃ»§µÄÊÕ¼şÈËµØÖ·ĞÅÏ¢
+	 * ï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Ëµï¿½Ö·ï¿½ï¿½Ï¢
 	 * @param userId
 	 * @return
 	 */
 	public List<Address> findAddressByUserId(Integer userId);
 	
 	/**
-	 * ¶ÁÈ¡ÓÃ»§Ä¬ÈÏµØÖ·
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½Ä¬ï¿½Ïµï¿½Ö·
 	 * @param userId
 	 * @return
 	 */
 
 	public Address findDefaultAddr(Integer userId);
 	/**
-	 * ¸ù¾İid²éÑ¯ÊÕ»õÈËµØÖ·ĞÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Ñ¯ï¿½Õ»ï¿½ï¿½Ëµï¿½Ö·ï¿½ï¿½Ï¢
 	 * @param addrId
 	 * @return
 	 */

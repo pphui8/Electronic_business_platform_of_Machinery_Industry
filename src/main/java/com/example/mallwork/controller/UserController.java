@@ -1,4 +1,4 @@
-package com.example.mallwork.Controller;
+package com.example.mallwork.controller;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.Entity.User;
@@ -6,20 +6,25 @@ import com.example.mallwork.Service.UserService;
 import com.example.mallwork.Tools.ConstUtil;
 import com.example.mallwork.Vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService actionUserService;
+
+	@RequestMapping(value = "/getstring")
+	public String getString(){
+		return "hekai";
+	}
 
 	@RequestMapping("/do_login.do")
 	@ResponseBody

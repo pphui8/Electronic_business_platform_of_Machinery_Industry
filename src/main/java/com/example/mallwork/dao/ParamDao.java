@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.Param;
 
@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface ParamDao {
 	/**
-	 * Í¨¹ý¸¸½Úµãid²éÕÒ×Ó½Úµã²ÎÊý
+	 * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½idï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½
 	 * @param parentId
 	 * @return
 	 */
 	public List<Param> findParamsByParentId(Integer parentId);
 	/**
-	 * ¸ù¾Ý½Úµãid²éÕÒ²Î¿¼¶ÔÏó
+	 * ï¿½ï¿½ï¿½Ý½Úµï¿½idï¿½ï¿½ï¿½Ò²Î¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param id
 	 * @return
 	 */

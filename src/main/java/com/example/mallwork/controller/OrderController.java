@@ -1,4 +1,4 @@
-package com.example.mallwork.Controller;
+package com.example.mallwork.controller;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.Entity.User;

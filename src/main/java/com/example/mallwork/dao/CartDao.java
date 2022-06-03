@@ -1,4 +1,4 @@
-package com.example.mallwork.Dao;
+package com.example.mallwork.dao;
 
 import com.example.mallwork.Entity.Cart;
 
@@ -6,48 +6,48 @@ import java.util.List;
 
 public interface CartDao {
 	/**
-	 * ²éÕÒÓÃ»§¹ºÎï³µÖÐÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param userid
 	 * @return
 	 */
 	public List<Cart> findCartByUser(Integer userid);
 	/***
-	 * ¸ù¾ÝuserIdºÍproductId²éÑ¯¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½ï¿½userIdï¿½ï¿½productIdï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï³µ
 	 * @param userid
 	 * @param productId
 	 * @return
 	 */
 	public Cart findCartByUserAndProductId(Integer userid, Integer productId);
 	/**
-	 * ÐÂÔö¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï³µ
 	 * @param cart
 	 */
 	public int insertCart(Cart cart);
 	/**
-	 * ¸üÐÂ¹ºÎï³µÖÐÉÌÆ·ÊýÁ¿
+	 * ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	 * @param actionCart
 	 */
 	public int updateCartById(Cart actionCart);
 	/**
-	 * Çå¿Õ¹ºÎï³µ
+	 * ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 	 * @param userId
 	 * @return
 	 */
 	public int deleteCartByUserId(Integer userId);
 	/**
-	 * ¸üÐÂ¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µ
 	 * @param actionCart
 	 */
 	public int updateCartByUserIdAndProductId(Cart actionCart);
 	/**
-	 * É¾³ý¹ºÎï³µÖÐÉÌÆ·
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·
 	 * @param userId
 	 * @param productId
 	 * @return
 	 */
 	public int deleteCarts(Integer userId, Integer productId);
 	/**
-	 * »ñÈ¡¹ºÎï³µÖÐÊýÁ¿
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param userid
 	 * @return
 	 */

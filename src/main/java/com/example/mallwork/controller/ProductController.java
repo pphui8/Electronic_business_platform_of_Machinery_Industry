@@ -1,4 +1,4 @@
-package com.example.mallwork.Controller;
+package com.example.mallwork.controller;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.Entity.Product;
@@ -17,20 +17,20 @@ import java.util.List;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-//	´´½¨service¶ÔÏó
+//	ï¿½ï¿½ï¿½ï¿½serviceï¿½ï¿½ï¿½ï¿½
 	@Autowired
 	private ProductService ProductService;
 	@RequestMapping("/find_product.do")
 	@ResponseBody
-	//²éÑ¯ÉÌÆ·ÐÅÏ¢¸ù¾ÝÉÌÆ·ÀàÐÍºÍÅä¼þÀàÐÍ²éÑ¯ÒÔ¼°×ÜÒ³ÊýÓëÃ¿Ò³ÐÐÊý
+	//ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Íºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½Ñ¯ï¿½Ô¼ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ã¿Ò³ï¿½ï¿½ï¿½ï¿½
 	public SverResponse<PageBean<Product>> findProducts(Integer productId, Integer partId
 			, Integer pageNum, Integer pageSize) {
 		// TODO Auto-generated method stub
-		//µ÷ÓÃService²ã·½·¨½øÐÐ·ÖÒ³²éÑ¯
+		//ï¿½ï¿½ï¿½ï¿½Serviceï¿½ã·½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½Ò³ï¿½ï¿½Ñ¯
 		return ProductService.findProduct(productId, partId, pageNum, pageSize);
 	}
 	/**
-	 * ÈÈÏúÉÌÆ·Õ¹Ê¾
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Õ¹Ê¾
 	 * @param num
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public class ProductController {
 		return ProductService.findHotProducts(num);
 	}
 	/**
-	 * ²éÕÒÂ¥²ãÉÌÆ·
+	 * ï¿½ï¿½ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½Æ·
 	 * @return
 	 */
 	@RequestMapping("/findfloors.do")
@@ -50,7 +50,7 @@ public class ProductController {
 		
 	}
 	/**
-	 * ÃÅ»§£¬¸ù¾ÝÉÌÆ·±àºÅ»ñµÃÉÌÆ·ÐÅÏ¢
+	 * ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @return
 	 */
 	@RequestMapping("/getdetail.do")
@@ -59,7 +59,7 @@ public class ProductController {
 		return ProductService.findProductDetailForPortal(productId);
 	}
 	/**
-	 * ²éÑ¯ÉÌÆ·ÐÅÏ¢
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 	 * @param productTypeId
 	 * @param partsId
 	 * @param name

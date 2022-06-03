@@ -1,6 +1,6 @@
-package com.example.mallwork.DaoImp;
+package com.example.mallwork.daoImp;
 
-import com.example.mallwork.Dao.OrderDao;
+import com.example.mallwork.dao.OrderDao;
 import com.example.mallwork.Entity.Order;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -18,7 +18,7 @@ public class OrderDaoImp implements OrderDao {
 	@Autowired
 	private QueryRunner queryRunner;
 	/**
-	 * »ñÈ¡ÓÃ»§¶©µ¥×ÜÊý
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private String alias="id,order_no as orderNo,uid as uId,addr_id as addrId,amount,type,"
 			+ "freight,status,payment_time as paymentTime,delivery_time as deliveryTime,"
@@ -28,13 +28,13 @@ public class OrderDaoImp implements OrderDao {
 		String sql="select count(id) as num from action_orders where uid =? ";
 		List<Object> params = new ArrayList<>();
 		params.add(userid);
-		//ÅÐ¶Ï¶©µ¥×´Ì¬
+		//ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½×´Ì¬
 		if (status!=0) {
 			sql+="and status = ?";
 			params.add(status);
 		}
 		try {
-			//»ñÈ¡×ÜÊý
+			//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 			return queryRunner.query(sql, new ColumnListHandler<Long>("num"),params.toArray()).get(0).intValue();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,14 +43,14 @@ public class OrderDaoImp implements OrderDao {
 		}
 	}
 	/**
-	 * »ñÈ¡ÓÃ»§¶©µ¥ÏêÇé·ÖÒ³ÏÔÊ¾
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ê¾
 	 */
 	@Override
 	public List<Order> findOrders(Integer userid, Integer status, int startIndex, int pageSize) {
 		String sql = "select " + this.alias +" from action_orders where uid=? ";
 		List<Object> params = new ArrayList<>();
 		params.add(userid);
-		//ÅÐ¶Ï¶©µ¥×´Ì¬
+		//ï¿½Ð¶Ï¶ï¿½ï¿½ï¿½×´Ì¬
 //		System.out.println(userid);
 		if (status!=0) {
 			sql+="and status = ? ";
@@ -68,7 +68,7 @@ public class OrderDaoImp implements OrderDao {
 		}
 	}
 	/**
-	 * ¸ù¾ÝÓÃ»§id¼°¶©µ¥ºÅ²éÑ¯¶©µ¥
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public Order findOrderByUserAndOrderNo(Integer userid, Long orderNo) {
@@ -81,7 +81,7 @@ public class OrderDaoImp implements OrderDao {
 		}
 	}
 	/**
-	 * È¡Ïû¶©µ¥¼´¸üÐÂ¶©µ¥ÏûÏ¢
+	 * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public int updateOrder(Order updateOrder) {
@@ -118,7 +118,7 @@ public class OrderDaoImp implements OrderDao {
 		}
 	}
 	/**
-	 * ±£´æ¶©µ¥ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½æ¶©ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public int insertOrder(Order order) {

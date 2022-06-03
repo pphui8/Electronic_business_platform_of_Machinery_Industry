@@ -1,8 +1,8 @@
 package com.example.mallwork.ServiceImp;
 
 import com.example.mallwork.Common.SverResponse;
-import com.example.mallwork.Dao.CartDao;
-import com.example.mallwork.Dao.ProductDao;
+import com.example.mallwork.dao.CartDao;
+import com.example.mallwork.dao.ProductDao;
 import com.example.mallwork.Entity.Cart;
 import com.example.mallwork.Entity.Product;
 import com.example.mallwork.Service.CartService;
@@ -26,13 +26,13 @@ public class CartServiceImp implements CartService {
 	private ProductDao ProductDao;
 	@Override
 	public SverResponse<String> saveOrUpdate(Integer userid, Integer productId, Integer count) {
-		//ÑéÖ¤²ÎÊýÊÇ·ñ´æÔÚ
+		//ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		if (userid==null||productId==null||count==null) {
-			return SverResponse.createByErrorMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//²é¿´ÓÃ»§µÄ¹ºÎï³µÊÇ·ñ´æÔÚÉÌÆ·
+		//ï¿½é¿´ï¿½Ã»ï¿½ï¿½Ä¹ï¿½ï¿½ï³µï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 		Cart Cart = CartDao.findCartByUserAndProductId(userid,productId);
-		//²»´æÔÚÐÂÔö
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (Cart==null) {
 			Cart cart = new Cart();
 			cart.setUserId(userid);
@@ -42,47 +42,47 @@ public class CartServiceImp implements CartService {
 			cart.setUpdated(new Date());
 			CartDao.insertCart(cart);
 		}else {
-			//´æÔÚ¸üÐÂ
+			//ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½
 			int cartCount = Cart.getQuantity()+count;
 			Cart.setQuantity(cartCount);
 			CartDao.updateCartById(Cart);
 		}
 
-		return SverResponse.createRespBySuccessMessage("ÉÌÆ·ÒÑ³É¹¦Ìí¼Óµ½¹ºÎï³µ£¡");
+		return SverResponse.createRespBySuccessMessage("ï¿½ï¿½Æ·ï¿½Ñ³É¹ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½");
 	}
 	/**
-	 * ²éÕÒ¹ºÎï³µÖÐËùÓÐÐÅÏ¢
+	 * ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	@Override
 	public SverResponse<CartVo> findAllCarts(Integer userid) {
 		if (userid==null) {
-			return SverResponse.createByErrorMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//1.²éÕÒÓÃ»§¹ºÎï³µÖÐÉÌÆ·
+		//1.ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·
 		List<Cart> list = CartDao.findCartByUser(userid);
-		//2.·â×°CartVo¶ÔÏó
+		//2.ï¿½ï¿½×°CartVoï¿½ï¿½ï¿½ï¿½
 		CartVo cartVo = createCartVo(list);
 		return SverResponse.createRespBySuccess(cartVo);
 	}
 	/**
-	 * ·â×°¹ºÎï³µvo¶ÔÏó
+	 * ï¿½ï¿½×°ï¿½ï¿½ï¿½ï³µvoï¿½ï¿½ï¿½ï¿½
 	 * @param carts
 	 * @return
 	 */
 	private CartVo createCartVo(List<Cart> carts) {
 		CartVo cartVo = new CartVo();
 		List<CartsListVo> list = Lists.newArrayList();
-		//¹ºÎï³µÉÌÆ·×Ü¼Û¸ñ
+		//ï¿½ï¿½ï¿½ï³µï¿½ï¿½Æ·ï¿½Ü¼Û¸ï¿½
 		BigDecimal cartTotalPrice = new BigDecimal("0");
 		if (CollectionUtils.isEmpty(null)) {
 			for(Cart cart:carts ) {
-				//×ª»»¶ÔÏó
+				//×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				CartsListVo listVo =new CartsListVo();
 				listVo.setId(cart.getId());
 				listVo.setUserId(cart.getUserId());
 				listVo.setProductId(cart.getProductId());
 				listVo.setChecked(cart.getChecked());
-				//·â×°ÉÌÆ·ÐÅÏ¢
+				//ï¿½ï¿½×°ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 				Product product = ProductDao.findProductById(listVo.getProductId());
 				if(product!=null) {
 					listVo.setName(product.getName());
@@ -90,26 +90,26 @@ public class CartServiceImp implements CartService {
 					listVo.setPrice(product.getPrice());
 					listVo.setStock(product.getStock());;;
 					listVo.setIconUrl(product.getIconUrl());
-					//ÅÐ¶Ï¿â´æ
+					//ï¿½Ð¶Ï¿ï¿½ï¿½
 					int buyCount=0;
 					if(product.getStock()>=cart.getQuantity()) {
 						buyCount=cart.getQuantity();
 					}else {
 						buyCount = product.getStock();
-						//¸üÐÂ¹ºÎï³µÖÐÉÌÆ·ÊýÁ¿
+						//ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 						Cart updateCart = new Cart();
 						updateCart.setId(cart.getId());
 						updateCart.setQuantity(buyCount);
-						//¸üÐÂÑ¡ÖÐ×´Ì¬
+						//ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½×´Ì¬
 						updateCart.setChecked(cart.getChecked());
 						CartDao.updateCartById(updateCart);
 					}
 					listVo.setQuantity(buyCount);
-					//¼ÆËã¹ºÎï³µÖÐÄ³ÉÌÆ·×Ü¼Û¸ñ
+					//ï¿½ï¿½ï¿½ã¹ºï¿½ï³µï¿½ï¿½Ä³ï¿½ï¿½Æ·ï¿½Ü¼Û¸ï¿½
 					BigDecimal totalPrice = CalcUtil.mul(listVo.getPrice().doubleValue(), listVo.getQuantity().doubleValue());
 					listVo.setTotalPrice(totalPrice);	
 					if(cart.getChecked() ==1) {
-						//¼ÆËã¹ºÎï³µÑ¡ÖÐ×´Ì¬ÉÌÆ·µÄ×Ü¼Û¸ñ
+						//ï¿½ï¿½ï¿½ã¹ºï¿½ï³µÑ¡ï¿½ï¿½×´Ì¬ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
 						cartTotalPrice = CalcUtil.add(cartTotalPrice.doubleValue(), listVo.getTotalPrice().doubleValue());
 					}
 				}
@@ -121,65 +121,65 @@ public class CartServiceImp implements CartService {
 		return cartVo;
 	}
 	/**
-	 * Çå¿Õ¹ºÎï³µ
+	 * ï¿½ï¿½Õ¹ï¿½ï¿½ï³µ
 	 */
 	@Override
 	public SverResponse<String> clearCart(Integer userid) {
-		//ÅÐ¶Ï²ÎÊýÕýÈ·
+		//ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½È·
 		if(userid == null) {
-			return SverResponse.createByErrorMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createByErrorMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//Çå¿Õ¹ºÎï³µ£¬ÅÐ¶ÏÕýÈ·
+		//ï¿½ï¿½Õ¹ï¿½ï¿½ï³µï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½È·
 		int rs = CartDao.deleteCartByUserId(userid);
 		if(rs >0) {
-			return SverResponse.createRespBySuccessMessage("³É¹¦Çå¿Õ¹ºÎï³µ£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½É¹ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï³µï¿½ï¿½");
 		}
-		return SverResponse.createByErrorMessage("Çå¿Õ¹ºÎï³µÊ§°Ü");
+		return SverResponse.createByErrorMessage("ï¿½ï¿½Õ¹ï¿½ï¿½ï³µÊ§ï¿½ï¿½");
 	}
 	/**
-	 * ¸üÐÂ¹ºÎï³µ
+	 * ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µ
 	 */
 	@Override
 	public SverResponse<CartVo> updateCart(Integer userid, Integer productId, Integer count, Integer checked) {
-		//ÅÐ¶Ï²ÎÊý
+		//ï¿½Ð¶Ï²ï¿½ï¿½ï¿½
 		if(userid==null || productId==null || count ==null) {
-			return SverResponse.createRespBySuccessMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//¸üÐÂ¹ºÎï³µÐÅÏ¢
+		//ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï³µï¿½ï¿½Ï¢
 		Cart Cart = new Cart();
 		Cart.setUserId(userid);
 		Cart.setProductId(productId);
 		Cart.setQuantity(count);
 		Cart.setChecked(checked);
 		CartDao.updateCartByUserIdAndProductId(Cart);
-		//·µ»ØËùÓÐ¹ºÎï³µÐÅÏ¢
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï³µï¿½ï¿½Ï¢
 		return findAllCarts(userid);
 	}
 	/**
-	 * É¾³ý¹ºÎï³µÖÐÉÌÆ·
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½Æ·
 	 */
 	@Override
 	public SverResponse<CartVo> deleteCart(Integer userId, Integer productId) {
-		//ÅÐ¶Ï²ÎÊý
+		//ï¿½Ð¶Ï²ï¿½ï¿½ï¿½
 		if(userId ==null || productId ==null ) {
-			return SverResponse.createRespBySuccessMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
-		//É¾³ýÉÌÆ·
+		//É¾ï¿½ï¿½ï¿½ï¿½Æ·
 		int rs = CartDao.deleteCarts(userId,productId);
 		if(rs >0) {
-			//·µ»ØËùÓÐ¹ºÎï³µÐÅÏ¢
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï³µï¿½ï¿½Ï¢
 			return this.findAllCarts(userId);
 		}
-		return SverResponse.createRespBySuccessMessage("É¾³ýÉÌÆ·Ê§°Ü£¡");
+		return SverResponse.createRespBySuccessMessage("É¾ï¿½ï¿½ï¿½ï¿½Æ·Ê§ï¿½Ü£ï¿½");
 	}
 	/**
-	 * ÏÔÊ¾¹ºÎï³µÖÐÊýÁ¿
+	 * ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public SverResponse<Integer> getCartCount(Integer userid) {
-		//ÅÐ¶Ï²ÎÊý
+		//ï¿½Ð¶Ï²ï¿½ï¿½ï¿½
 		if(userid == null) {
-			return SverResponse.createRespBySuccessMessage("²ÎÊý´íÎó£¡");
+			return SverResponse.createRespBySuccessMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		int count = CartDao.getCartCountByUserId(userid);
 		return SverResponse.createRespBySuccess(Integer.valueOf(count));

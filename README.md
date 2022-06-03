@@ -11,6 +11,7 @@
 ## branches
 ##### main -> 项目简介
 ##### master -> 前端
+##### fake_backend -> 用于前端开发的虚拟后端
 ##### xxxx -> 后端
 ##### xxxx -> 移动端
 

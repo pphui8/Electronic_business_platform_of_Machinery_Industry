@@ -1,4 +1,4 @@
-package com.example.mallwork.ServiceImp;
+package com.example.mallwork.Service.impl;
 
 import com.example.mallwork.Common.SverResponse;
 import com.example.mallwork.dao.UserDao;

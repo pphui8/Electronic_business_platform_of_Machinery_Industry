@@ -1,4 +1,4 @@
-package com.example.mallwork.daoImp;
+package com.example.mallwork.dao.impl;
 
 import com.example.mallwork.dao.CartDao;
 import com.example.mallwork.Entity.Cart;

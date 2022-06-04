@@ -25,7 +25,7 @@ public  class AddrDaoImp implements AddrDao {
 	@Override
 	public int findDefaultAddrByUserId(Integer userId) {
 		//???
-		String sql = "select count(id) as num from action_address where user_id = ? and default_addr=1 and del_state=0";
+		String sql = "select count(id) as num from address where user_id = ? and default_addr=1 and del_state=0";
 		try {
 			return queryRunner.query(sql,new ColumnListHandler<Long>("num"),userId).get(0).intValue();
 		} catch (SQLException e) {
@@ -39,7 +39,7 @@ public  class AddrDaoImp implements AddrDao {
 	@Override
 	public int instertAddress(Address addr) {
 		//????????
-		String sql = "insert into action_address(user_id,name,phone,mobile,"
+		String sql = "insert into address(user_id,name,phone,mobile,"
 				+ "province,city,district,addr,zip,default_addr,created,updated) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] params = {
 				addr.getUserId(),addr.getName(),addr.getPhone(),addr.getMobile(),
@@ -59,7 +59,7 @@ public  class AddrDaoImp implements AddrDao {
 	 */
 	@Override
 	public int updateAddress(Address addr) {
-		String sql = "update action_address set updated = ?";
+		String sql = "update address set updated = ?";
 		List<Object> params = new ArrayList<>();
 		params.add(addr.getUpdated());
 		//???java??long????????§Ø?name??????
@@ -128,7 +128,7 @@ public  class AddrDaoImp implements AddrDao {
 	public List<Address> findAddressByUserId(Integer userId) {
 		String sql="select id,user_id as userId,name,phone,mobile,province,city,"
 				+"district,addr,zip,default_addr as defaultAddr,del_state as delState,created,updated"
-				+ " from action_address where user_id  = ? and del_state=0 order by default_addr desc,updated desc";
+				+ " from address where user_id  = ? and del_state=0 order by default_addr desc,updated desc";
 		try {
 			return queryRunner.query(sql, new BeanListHandler<Address>(Address.class), userId);
 		} catch (SQLException e) {
@@ -144,7 +144,7 @@ public  class AddrDaoImp implements AddrDao {
 	public Address findDefaultAddr(Integer userId) {
 		String sql="select id,user_id as userId,name,phone,mobile,province,city,"
 				+"district,addr,zip,default_addr as defaultAddr,del_state as delState,created,updated"
-				+ " from action_address where user_id=? and default_addr=1";
+				+ " from address where user_id=? and default_addr=1";
 		try {
 			return queryRunner.query(sql, new BeanHandler<Address>(Address.class),userId);
 		} catch (SQLException e) {
@@ -160,7 +160,7 @@ public  class AddrDaoImp implements AddrDao {
 	public Address findAddressById(Integer addrId) {
 		String sql="select id,user_id as userId,name,phone,mobile,province,city,"
 				+"district,addr,zip,default_addr as defaultAddr,del_state as delState,created,updated"
-				+ " from action_address where id=? and del_state=0";
+				+ " from address where id=? and del_state=0";
 		try {
 			return queryRunner.query(sql, new BeanHandler<Address>(Address.class), addrId);
 		} catch (SQLException e) {

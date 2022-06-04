@@ -24,7 +24,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public List<Cart> findCartByUser(Integer userid) {
-		String sql="select "+this.alais+" from action_carts where user_id=?";
+		String sql="select "+this.alais+" from shopping_cart where user_id=?";
 		try {
 			return queryRunner.query(sql,new BeanListHandler<Cart>(Cart.class), userid);
 		} catch (SQLException e) {
@@ -37,7 +37,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public Cart findCartByUserAndProductId(Integer userid, Integer productId) {
-		String sql="select " + this.alais+ " from action_carts where user_id=? and product_id=?";
+		String sql="select " + this.alais+ " from shopping_cart where user_id=? and product_id=?";
 		try {
 			return queryRunner.query(sql,new BeanHandler<Cart>(Cart.class) ,userid,productId);
 		} catch (SQLException e) {
@@ -50,7 +50,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public int insertCart(Cart cart) {
-		String sql = "insert into action_carts(user_id,product_id,quantity,created,updated)"
+		String sql = "insert into shopping_cart(user_id,product_id,quantity,created,updated)"
 				+ " values(?,?,?,?,?)";
 		Object[] params = {cart.getUserId(),cart.getProductId(),cart.getQuantity(),cart.getCreated(),cart.getUpdated()  };
 		try {
@@ -65,7 +65,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public int updateCartById(Cart Cart) {
-		String sql = "update action_carts set quantity = ? where id=?";
+		String sql = "update shopping_cart set quantity = ? where id=?";
 		Object[] params = {
 				Cart.getQuantity(),Cart.getId()
 		};
@@ -82,7 +82,7 @@ public class CartDaoImp implements CartDao {
 
 	@Override
 	public int deleteCartByUserId(Integer userId) {
-		String sql = "delete from action_carts where user_id = ?";
+		String sql = "delete from shopping_cart where user_id = ?";
 		try {
 			return queryRunner.update(sql, userId);
 		} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public int updateCartByUserIdAndProductId(Cart Cart) {
-		String sql = "update action_carts set quantity = ?";
+		String sql = "update shopping_cart set quantity = ?";
 		List<Object> params = new ArrayList<>();
 		params.add(Cart.getQuantity());
 		if(Cart.getChecked()!=null) {
@@ -119,7 +119,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public int deleteCarts(Integer userId, Integer productId) {
-		String sql ="delete from action_carts where product_id = ? and user_id = ?";
+		String sql ="delete from shopping_cart where product_id = ? and user_id = ?";
 		try {
 			return queryRunner.update(sql,productId,userId);
 		} catch (SQLException e) {
@@ -132,7 +132,7 @@ public class CartDaoImp implements CartDao {
 	 */
 	@Override
 	public int getCartCountByUserId(Integer userid) {
-		String sql = "select count(id) as num from action_carts where user_id = ?";
+		String sql = "select count(id) as num from shopping_cart where user_id = ?";
 		try {
 			return queryRunner.query(sql, new ColumnListHandler<Long>("num"), userid).get(0).intValue();
 		} catch (SQLException e) {

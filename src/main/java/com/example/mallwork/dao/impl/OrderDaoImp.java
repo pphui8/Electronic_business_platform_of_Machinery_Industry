@@ -25,7 +25,7 @@ public class OrderDaoImp implements OrderDao {
 			+ "finish_time as finishTime,close_time as closeTime,updated,created ";
 	@Override
 	public int getTotalRecord(Integer userid, Integer status) {
-		String sql="select count(id) as num from action_orders where uid =? ";
+		String sql="select count(id) as num from order_form where uid =? ";
 		List<Object> params = new ArrayList<>();
 		params.add(userid);
 		//�ж϶���״̬
@@ -47,7 +47,7 @@ public class OrderDaoImp implements OrderDao {
 	 */
 	@Override
 	public List<Order> findOrders(Integer userid, Integer status, int startIndex, int pageSize) {
-		String sql = "select " + this.alias +" from action_orders where uid=? ";
+		String sql = "select " + this.alias +" from order_form where uid=? ";
 		List<Object> params = new ArrayList<>();
 		params.add(userid);
 		//�ж϶���״̬
@@ -72,7 +72,7 @@ public class OrderDaoImp implements OrderDao {
 	 */
 	@Override
 	public Order findOrderByUserAndOrderNo(Integer userid, Long orderNo) {
-		String sql="select " + this.alias + " from action_orders where uid=? and order_no =?";
+		String sql="select " + this.alias + " from order_form where uid=? and order_no =?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<Order>(Order.class), userid,orderNo);
 		} catch (SQLException e) {
@@ -85,7 +85,7 @@ public class OrderDaoImp implements OrderDao {
 	 */
 	@Override
 	public int updateOrder(Order updateOrder) {
-		String sql = "update action_orders set updated = ?";
+		String sql = "update order_form set updated = ?";
 		List<Object> params = new ArrayList<>();
 		params.add(updateOrder.getUpdate());
 		if (updateOrder.getStatus()!=null) {
@@ -122,7 +122,7 @@ public class OrderDaoImp implements OrderDao {
 	 */
 	@Override
 	public int insertOrder(Order order) {
-		String sql="insert into action_orders(order_no,"
+		String sql="insert into order_form(order_no,"
 				+ "uid,addr_id,amount,type,freight,"
 				+ "status,payment_time,delivery_time,"
 				+ "finish_time,close_time,updated,created)"

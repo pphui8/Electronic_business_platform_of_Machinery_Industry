@@ -18,7 +18,7 @@ public class ParamDaoImp implements ParamDao {
 	@Override
 	public List<Param> findParamsByParentId(Integer parentId) {
 		String sql = "select id , parent_id as parentId,name,sort_order as sortOrder,"
-				+ "status,created,updated,level from action_params where "
+				+ "status,created,updated,level from kind where "
 				+ "parent_id = ? order by sort_order";
 		try {
 			return queryRunner.query(sql, new BeanListHandler<Param>(Param.class), parentId);
@@ -33,7 +33,7 @@ public class ParamDaoImp implements ParamDao {
 	 */
 	@Override
 	public Param findParamById(Integer id) {
-		String sql ="select id, parent_id,name,sort_order,status,created,updated,level from action_params where id = ?";
+		String sql ="select id, parent_id,name,sort_order,status,created,updated,level from kind where id = ?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<Param>(Param.class), id);
 		} catch (SQLException e) {

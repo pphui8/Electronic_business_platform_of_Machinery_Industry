@@ -23,7 +23,7 @@ public class OrderItemDaoImp implements OrderItemDao {
 	 */
 	@Override
 	public List<OrderItem> getItemsByOrderNo(Long orderNo) {
-		String sql = "select "+this.alias+" from action_order_items "
+		String sql = "select "+this.alias+" from order_item "
 				+ "where order_no=?";
 		try {
 			return queryRunner.query(sql, new BeanListHandler<OrderItem>(OrderItem.class), orderNo);
@@ -38,7 +38,7 @@ public class OrderItemDaoImp implements OrderItemDao {
 	
 	@Override
 	public int[] batchInsert(List<OrderItem> orderItems) {
-		String sql="insert into action_order_items(uid,order_no,"
+		String sql="insert into order_item(uid,order_no,"
 				+ "goods_id,goods_name,icon_url,"
 				+ "price,quantity,total_price,created,updated)"
 				+ " values(?,?,?,?,?,?,?,?,?,?)";

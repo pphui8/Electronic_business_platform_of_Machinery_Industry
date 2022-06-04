@@ -29,7 +29,7 @@ public class ProductDaoImp implements ProductDao {
 	public Integer getTotalCount(Integer productId, Integer partsId) {
 		// TODO Auto-generated method stub
 		
-		String sql = "select count(*) as num from action_products where 1=1";
+		String sql = "select count(*) as num from commodity where 1=1";
 		//��������
 		List<Object> params=new ArrayList<>();
 		
@@ -62,7 +62,7 @@ public class ProductDaoImp implements ProductDao {
 		String sql="select id,name,product_id as productId,parts_id as partsId,"
 				+"icon_url as iconUrl,sub_images as subImages,detail,spec_param as specParam,"
 				+"price,stock,status,is_hot as hot,"
-				+"created,updated from action_products where 1=1";
+				+"created,updated from commodity where 1=1";
 		//��������
 		List<Object> params=new ArrayList<>();
 		
@@ -92,7 +92,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public Product findProductById(Integer id) {
-		String sql="select "+ this.alias+" from action_products where id=?";
+		String sql="select "+ this.alias+" from commodity where id=?";
 		try {
 			return queryRunner.query(sql, new BeanHandler<Product>(Product.class),id);
 		} catch (SQLException e) {
@@ -105,7 +105,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public int updateProduct(Product product) {
-		String sql="update action_products set updated = ?";
+		String sql="update commodity set updated = ?";
 		List<Object> params = new ArrayList<>();
 		params.add(product.getupdated());
 		if(!StringUtils.isEmpty(product.getName())) {
@@ -180,7 +180,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public List<Product> findHotProducts(Integer num) {
-		String sql="select "+this.alias+" from action_products where is_hot=1 and status=2 "
+		String sql="select "+this.alias+" from commodity where is_hot=1 and status=2 "
 				+ "order by updated,id desc";
 		if(num !=null) {
 			sql+=" limit 0,?";
@@ -201,7 +201,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public List<Product> findProductsByProductCategory(int categoryId) {
-		String sql = "select " +this.alias+ " from action_products where product_id = ? and status=2 order by updated desc";
+		String sql = "select " +this.alias+ " from commodity where product_id = ? and status=2 order by updated desc";
 		try {
 			return queryRunner.query(sql, new BeanListHandler<Product>(Product.class), categoryId);
 		} catch (SQLException e) {
@@ -214,7 +214,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public Integer getTotalCount(Product product) {
-		String sql ="select count(id) as num from action_products where 1=1 ";
+		String sql ="select count(id) as num from commodity where 1=1 ";
 		List<Object> params = new ArrayList<>();
 		if(product.getId()!=null) {
 			sql+=" and id = ?";
@@ -249,7 +249,7 @@ public class ProductDaoImp implements ProductDao {
 	 */
 	@Override
 	public List<Product> findProducts(Product product, int startIndex, int pageSize) {
-		String sql = "select " +this.alias+ " from action_products where 1=1";
+		String sql = "select " +this.alias+ " from commodity where 1=1";
 		List<Object> params = new ArrayList<>();
 		if(product.getId()!=null) {
 			sql+=" and id = ?";

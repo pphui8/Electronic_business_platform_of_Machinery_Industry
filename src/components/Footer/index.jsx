@@ -72,7 +72,7 @@ export default function Footer() {
                           <a href="#">登入</a>
                         </li>
                         <li>
-                          <a href="#">购买</a>
+                          <a href="#">注册</a>
                         </li>
                         <li>
                           <a href="#">获取支持</a>

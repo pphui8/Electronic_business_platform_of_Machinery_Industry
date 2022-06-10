@@ -1,0 +1,28 @@
+.register_btn {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register_btn:hover {
+    color: aqua;
+}
+
+.submit {
+    display: block;
+    width: 100px;
+    background-color: #f15024;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+input {
+    text-transform:lowercase;
+}
+
+.mytitle {
+    color: rgb(255 255 255 / 85%);
+}

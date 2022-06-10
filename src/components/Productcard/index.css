@@ -1,0 +1,9 @@
+.link {
+    background-color: #f7444e;
+    border: 1px solid #f7444e;
+    color: #ffffff;
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 30px;
+    width: 165px;
+}

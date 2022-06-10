@@ -1,0 +1,17 @@
+.captcha {
+    margin-top: 0px;
+    vertical-align: middle !important;
+    margin-left: 30px;
+}
+
+.mysubmit {
+    display: inline-block;
+    margin-left: 30px;
+    margin-top: 10px;
+    height: 40px;
+    width: 100px;
+    background-color: #f15024;
+    text-align: center;
+    padding-top: 6px;
+    color: #fff;
+}

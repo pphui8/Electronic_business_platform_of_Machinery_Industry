@@ -7,7 +7,7 @@ export default function Header() {
     <header className="header_section">
       <div className="container">
         <nav className="navbar navbar-expand-lg custom_nav-container ">
-          <a className="navbar-brand" href="index.html">
+          <a className="navbar-brand" href="/">
             <img
               width="250"
               src="https://tvax1.sinaimg.cn/large/006z6YU4ly1h2pcltxdotj30zk081wfd.jpg"
@@ -38,8 +38,13 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/login" className="nav_link">
-                  登录
+                <Link to="/aboutme" className="nav_link">
+                  用户
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/trolley" className="nav_link">
+                  购物车
                 </Link>
               </li>
               {/* <li className="nav-item dropdown">
